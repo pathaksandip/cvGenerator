@@ -95,6 +95,14 @@ export const authOptions: NextAuthOptions = {
     signIn: "/",
   },
   callbacks: {
+    async signIn({ account, profile }) {
+      if (account && account.provider === "google") {
+        console.log(profile?.email);
+
+        // return profile && profile.email_verified && profile.email.endsWith("@example.com")
+      }
+      return true; // Do different verification for other providers that don't have `email_verified`
+    },
     async jwt({ token, user }) {
       if (user) {
         token.email = user.email;
@@ -110,11 +118,11 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async redirect({ url, baseUrl }) {
-      if (url.startsWith(baseUrl + "/api/auth/callback/google")) {
-        return baseUrl + "/dashboard";
-      } else {
-        return url.startsWith(baseUrl) ? url : baseUrl + "/dashboard";
-      }
+      // if (url.startsWith(baseUrl + "/api/auth/callback/google")) {
+      //   return baseUrl + "/dashboard";
+      // } else {
+      return url.startsWith(baseUrl) ? url : baseUrl + "/dashboard";
+      // }
     },
   },
 };
