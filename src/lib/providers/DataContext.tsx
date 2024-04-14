@@ -35,13 +35,15 @@ export const UserProvider: React.FC<DataProviderProps> = ({ children }) => {
         if (session.data?.user.email) {
           const userDetails = await getUser(session.data?.user.email);
           if (userDetails?.success) {
-            const { userName, userEmail, userPhone } = userDetails.success;
+            const { userName, userEmail, userPhone, userImage } =
+              userDetails.success;
 
             console.log("co:", userDetails.success);
             setUserData({
               userName: userName || "",
               userEmail: userEmail || "",
               userPhone: userPhone || "",
+              userImage: userImage || "",
             });
           }
         }
