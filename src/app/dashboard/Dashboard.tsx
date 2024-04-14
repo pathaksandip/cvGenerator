@@ -2,27 +2,27 @@
 import React, { useEffect, useState } from "react";
 import { getSession, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { getUser } from "@/lib/auth/auth.config";
 import { useDataFetching } from "@/lib/providers/DataContext";
+import Image from "next/image";
 function Dashboard() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { data: session } = useSession();
+  console.log("usersession", session?.user?.user?.image);
   const router = useRouter();
-  const { userData } = useDataFetching();
-  console.log("ddd", userData);
-  useEffect(() => {
-    const checkSession = async () => {
-      const currentSession = await getSession();
-      console.log("ss", currentSession);
-      if (!currentSession) {
-        router.push("/login");
-      } else {
-        router.push("/dashboard");
-      }
-    };
 
-    checkSession();
-  }, [session, router]);
+  // useEffect(() => {
+  //   const checkSession = async () => {
+  //     const currentSession = await getSession();
+  //     console.log("ss", currentSession);
+  //     // if (!currentSession) {
+  //     //   router.push("/login");
+  //     // } else {
+  //     //   router.push("/dashboard");
+  //     // }
+  //   };
+
+  //   checkSession();
+  // }, [session, router]);
 
   const handleSignOut = async () => {
     const SignOutResponse = await signOut({
@@ -45,10 +45,19 @@ function Dashboard() {
       <h1 className="text-2xl font-bold">This is Dashboard Page</h1>
       <div className="relative">
         <button
-          className="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+          className="py-1 px-1 me-2  mx-auto flex mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
           onClick={handleClick}
         >
-          {userData?.userEmail}
+          {session?.user?.image && (
+            <Image
+              className=" rounded-lg mx-2"
+              src={session.user?.image}
+              alt="User Image"
+              height={20}
+              width={20}
+            />
+          )}
+          {session?.user?.email}
         </button>
 
         {/* Dropdown menu */}

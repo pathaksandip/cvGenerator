@@ -22,17 +22,6 @@ model Login {
   @@map(name: "login")
 }
 
-model RegisterUser {
-  id             Int     @id @default(sequence())
-  userInId       String  @unique @default(uuid())
-  userInEmail    String  @unique
-  userInPhone    String?
-  userName       String?
-  userInPassword String
-
-  @@map(name: "registerUser")
-}
-
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -61,13 +50,19 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id             String    @id @default(cuid())
+  name           String?
+  userInId       String    @unique @default(uuid())
+  userInPhone    String?
+  userName       String?
+  userInPassword String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  accounts       Account[]
+  sessions       Session[]
+
+  @@map(name: "user")
 }
 
 model VerificationToken {

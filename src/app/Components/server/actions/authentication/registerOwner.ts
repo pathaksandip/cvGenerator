@@ -13,33 +13,33 @@ export const registerUser = async (data: string) => {
     return { error: "no data" };
   }
   try {
-    console.log("data", data);
     const { userEmail, userPassword, userPhone, userName } = JSON.parse(data);
-    console.log(data);
+    console.log("s", data);
     if (!userEmail || !userPassword || !userPhone)
       return { error: "Something went wrong" };
 
-    const existingUser = await prisma.registerUser.findFirst({
+    const existingUser = await prisma.user.findFirst({
       where: {
-        userInEmail: userEmail.toLowerCase(),
+        email: userEmail.toLowerCase(),
       },
     });
     if (existingUser) {
       return { error: "User already exist" };
     }
     const hashed_password = await bcrypt.hash(userPassword, 12);
-    const userAuth = await prisma.registerUser.create({
+    const userAuth = await prisma.user.create({
       data: {
-        userInEmail: userEmail.toLowerCase(),
+        email: userEmail.toLowerCase(),
         userInPassword: hashed_password,
         userInPhone: userPhone,
-        userName: userName,
+        name: userName,
+      
       },
     });
     if (!userAuth) {
       return { error: "Failed to create user" };
     }
   } catch (error) {
-    return { error: "Failed to create user" };
+    return { error: "Failed to add user" };
   }
 };
