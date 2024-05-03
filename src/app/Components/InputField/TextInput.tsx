@@ -25,9 +25,11 @@ const passwordType = z
     "Password must contain at least one uppercase, lowercase, number and special character"
   );
 const stringType = z.coerce.string().max(50); // Added maximum length constraint
-const phoneType = z.coerce.string().refine((value) => /^\d{10}$/i.test(value), {
-  message: "Invalid phone number",
-});
+const phoneType = z.coerce
+  .string()
+  .refine((value) => /^\d{10}$/.test(value.replace(/[-\s]/g, "")), {
+    message: "Invalid phone number",
+  });
 const numberType = z.coerce
   .number()
   .refine((value) => /^\d{1,10}$/i.test(value.toString()), {
@@ -46,6 +48,7 @@ interface TextInputProps {
   disabled?: boolean;
   onChange?: (value: string) => void;
   clearOnSuccess?: boolean;
+  readOnly?: boolean;
 }
 
 function TextInput({
@@ -60,6 +63,7 @@ function TextInput({
   required = false,
   clearOnSuccess = false,
   disabled = false,
+  readOnly = false,
 }: TextInputProps) {
   const [value, setValue] = useState<string>(values || "");
   const [error, setError] = useState<string | null>(null);
@@ -80,6 +84,21 @@ function TextInput({
   };
 
   const validateInput = (inputValue: string) => {
+    if (inputValue === value) {
+      // No need to validate if the input value hasn't changed
+      return;
+    }
+
+    if (inputValue === values) {
+      // Skip validation for the initial value from the server only if it's valid
+      const validationResult = getTypeValidator().safeParse(inputValue);
+      if (validationResult.success) {
+        setValue(inputValue);
+        setError(null);
+        return;
+      }
+    }
+
     if (inputValue === "") {
       setValue("");
       setError("");
@@ -156,6 +175,7 @@ function TextInput({
             value={values !== undefined ? values : value}
             required={required}
             disabled={disabled}
+            readOnly={readOnly}
             onChange={handleChange}
             className={`bg-gray-50 border ${
               icon ? "pl-10" : ""

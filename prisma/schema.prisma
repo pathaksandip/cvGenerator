@@ -61,8 +61,27 @@ model User {
   image          String?
   accounts       Account[]
   sessions       Session[]
+  abouts         About[]
 
   @@map(name: "user")
+}
+
+model About {
+  id          Int      @id @default(sequence())
+  aboutId     String   @unique @default(uuid())
+  firstName   String?
+  lastName    String?
+  designation String?
+  address     String?
+  city        String?
+  email       String?
+  phone       String?
+  summary     String?
+  user        User?    @relation(fields: [userId], references: [userInId])
+  userId      String?
+  socialLinks String?
+
+  @@map("about")
 }
 
 model VerificationToken {

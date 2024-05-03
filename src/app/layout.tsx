@@ -5,14 +5,14 @@ import "./globals.css";
 import { Metadata, Viewport } from "next";
 
 import Providers from "@/lib/providers/Providers";
+import { AboutProvider } from "@/lib/providers/AboutContext";
 
 export const metadata: Metadata = {
-  title: "InPro Store",
-  description: "Product of Inpro Academy",
+  title: "MyCV Creator",
   manifest: "/manifest.json",
 
   icons: {
-    icon: "/icon.png",
+    icon: "generatorcv/public/Images/cv.png",
     shortcut: "/shortcut-icon.png",
     apple: "/apple-icon.png",
     other: {
@@ -37,7 +37,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`antialiased`}>
         {" "}
-        <Providers> {children}</Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

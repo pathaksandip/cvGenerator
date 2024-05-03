@@ -1,6 +1,6 @@
 /** @format */
 
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, User } from "next-auth";
 
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
@@ -8,7 +8,6 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { z } from "zod";
 
-import { User } from "next-auth";
 import prisma from "../prisma";
 
 export async function getUser(email: string): Promise<User | null> {
@@ -25,8 +24,8 @@ export async function getUser(email: string): Promise<User | null> {
         password: user?.userInPassword || "",
         name: user?.userName,
         image: user?.image,
+        userId: user?.userInId,
       };
-      console.log("user", UserData);
       return UserData;
     } else {
       return null;
@@ -66,7 +65,7 @@ export const authOptions: NextAuthOptions = {
           const { email, password } = parsedCredentials.data;
 
           const user = await getUser(email);
-          console.log(user);
+          console.log("userinauth", user);
           if (!user) {
             throw new Error("User not found. Please enter valid credentials");
           }
@@ -89,6 +88,7 @@ export const authOptions: NextAuthOptions = {
   ],
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60 * 24,
   },
   pages: {
     signIn: "/login",
@@ -104,7 +104,7 @@ export const authOptions: NextAuthOptions = {
       if (token.email && session) {
         session.user.email = token.email;
       }
-      console.log("gs", session);
+
       return session;
     },
     async signIn({ account, user }) {

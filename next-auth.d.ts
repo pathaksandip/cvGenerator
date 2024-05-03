@@ -13,6 +13,7 @@ declare module "next-auth" {
   }
   interface User extends DefaultUser {
     password: string;
+    userId: string;
     masterStore?: string;
     stores?: string;
     employeeid?: string;

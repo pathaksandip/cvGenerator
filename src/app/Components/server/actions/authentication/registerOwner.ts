@@ -33,9 +33,9 @@ export const registerUser = async (data: string) => {
         userInPassword: hashed_password,
         userInPhone: userPhone,
         name: userName,
-      
       },
     });
+    console.log("userAut", userAuth);
     if (!userAuth) {
       return { error: "Failed to create user" };
     }

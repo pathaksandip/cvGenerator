@@ -1,6 +1,6 @@
 // UserContext.js
 "use client";
-import { getUser } from "@/app/Components/server/actions/UserData/UserData";
+import { getUser } from "@/app/Components/server/actions/getData/UserData";
 import { useSession } from "next-auth/react";
 import React, { createContext, useState, useContext, useEffect } from "react";
 
