@@ -143,9 +143,7 @@ function About() {
 
     return () => clearTimeout(timer); // Clean up the timeout on component unmount
   }, []);
-  if (!aboutFetchedData) {
-    return <LoadingComponent />;
-  }
+
   return (
     <div>
       <div className="px-3">

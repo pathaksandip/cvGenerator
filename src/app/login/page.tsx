@@ -182,7 +182,7 @@ const LoginPage: React.FC<PageProps> = () => {
                       type="button"
                       onClick={() =>
                         signIn("google", {
-                          callbackUrl: "http://localhost:3000/dashboard",
+                          callbackUrl: "/dashboard",
                         })
                       }
                       className="text-white w-full bg-[#f33b3b] hover:bg-[#f44b3b]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between mr-2 mb-2"

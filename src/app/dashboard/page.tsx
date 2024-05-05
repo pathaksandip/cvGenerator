@@ -2,9 +2,10 @@
 
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
+import LoadingComponent from "../LoadingComponent";
 
 const Dash = dynamic(() => import("./Dashboard"), {
-  loading: () => <p>Loading</p>, // Show the placeholder component while loading
+  loading: () => <LoadingComponent />, // Show the placeholder component while loading
   ssr: false, // Set to false if you don't want server-side rendering for this component
 });
 
