@@ -191,7 +191,7 @@ function PdfView() {
           <Editor editorState={editorState} onChange={handleEditorChange} />
         </div>
         <div>
-          {aboutDataDetail.socialLinks.length > 0 && (
+          {aboutDataDetail?.socialLinks?.length > 0 && (
             <div className="flex flex-wrap">
               {aboutDataDetail.socialLinks.map((link) => (
                 <div key={link.id} className="mr-4 mb-2">

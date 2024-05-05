@@ -21,7 +21,6 @@ export const createAbout = async (categoryName: FormData) => {
   if (user?.error) {
     return { error: user.error };
   }
-
   try {
     const aboutUsData = categoryName.get("aboutData");
     let aboutObtainedData: any;
@@ -67,6 +66,7 @@ export const createAbout = async (categoryName: FormData) => {
         // Create a new record
         const aboutDetail = await prisma.about.create({
           data: {
+            userId: user?.userId,
             firstName: firstName,
             lastName: lastName,
             designation: designation,

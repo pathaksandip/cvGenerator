@@ -151,6 +151,7 @@ function About() {
         <span className=" text-gray-500 mt-1">
           Fill out your primary information.
         </span>
+        <div>{aboutFetchedData?.firstName}</div>
         <div className=" mt-5">
           <div className=" flex space-x-5 justify-between mb-2">
             <div className="flex-1 basis-[100%] md:basis-[50%] lg:basis-[25%] ">
