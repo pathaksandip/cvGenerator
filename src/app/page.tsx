@@ -12,10 +12,9 @@ export default function Home() {
   return (
     <>
       {/* <Carousel /> */}
-      {/* <Register /> */}
+      <Register />
       {/* <MyComponent /> */}
       {/* <Register />  */}
-      <Dashboard />
     </>
   );
 }

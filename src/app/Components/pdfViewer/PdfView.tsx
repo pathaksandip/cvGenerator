@@ -12,7 +12,6 @@ import {
 } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { METHODS } from "http";
-import handleGeneratePdf from "@/app/api/generatePdf/page";
 
 interface Html2PdfOptions {
   margin: number;

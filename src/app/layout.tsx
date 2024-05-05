@@ -5,7 +5,6 @@ import "./globals.css";
 import { Metadata, Viewport } from "next";
 
 import Providers from "@/lib/providers/Providers";
-import { AboutProvider } from "@/lib/providers/AboutContext";
 
 export const metadata: Metadata = {
   title: "MyCV Creator",
