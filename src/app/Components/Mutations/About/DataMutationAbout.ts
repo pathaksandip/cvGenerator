@@ -17,7 +17,7 @@ export default function useAboutMutations() {
   const { mutateAsync: deleteSocial } = useMutation({
     mutationFn: deleteSocialLinks,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["lenderData"] });
+      queryClient.invalidateQueries({ queryKey: ["aboutData"] });
     },
   });
   // const { mutateAsync: updateData } = useMutation({

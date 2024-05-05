@@ -5,7 +5,7 @@ interface EducationRowProps {
   school: string;
   degree: string;
   city: string;
-  onDelete: () => void;
+  onDelete?: () => void;
 }
 
 const EducationRow: React.FC<EducationRowProps> = ({
