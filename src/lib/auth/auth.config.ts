@@ -20,6 +20,7 @@ export async function getUser(email: string): Promise<User | null> {
 
     if (user) {
       const UserData: User = {
+        id: user?.id,
         email: user?.email || "",
         password: user?.userInPassword || "",
         name: user?.userName,
