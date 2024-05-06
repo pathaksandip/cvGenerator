@@ -110,12 +110,24 @@ export const authOptions: NextAuthOptions = {
     },
     async signIn({ account, user }) {
       if (account && account.provider === "google") {
-        await prisma.login.create({
-          data: {
-            email: user.email || "",
-          },
-        });
+        if (user.email) {
+          const exisitngUser = await prisma.login.findUnique({
+            where: {
+              email: user?.email,
+            },
+          });
+          if (!exisitngUser) {
+            await prisma.login.create({
+              data: {
+                email: user.email || "",
+              },
+            });
+            return true;
+          }
+          return true;
+        }
       }
+
       return true; // Do different verification for other providers that don't have `email_verified`
     },
     async redirect({ url, baseUrl }) {
