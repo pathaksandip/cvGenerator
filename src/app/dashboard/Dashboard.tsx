@@ -50,7 +50,7 @@ function Dashboard() {
     if (!SignOutResponse) {
       return { error: "unable to sign out" };
     } else {
-      router.push("/login");
+      router.push("/");
     }
   };
   const handleClick = () => {
