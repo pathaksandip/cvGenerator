@@ -92,7 +92,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 60 * 60 * 24,
   },
   pages: {
-    signIn: "/login",
+    signIn: "/",
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -110,7 +110,11 @@ export const authOptions: NextAuthOptions = {
     },
     async signIn({ account, user }) {
       if (account && account.provider === "google") {
-        console.log("s", user?.email);
+        await prisma.login.create({
+          data: {
+            email: user.email || "",
+          },
+        });
       }
       return true; // Do different verification for other providers that don't have `email_verified`
     },

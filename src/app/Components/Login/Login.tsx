@@ -1,5 +1,3 @@
-/** @format */
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -9,11 +7,11 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import { signIn, useSession } from "next-auth/react";
-import TextInput from "../Components/InputField/TextInput";
 import { AiOutlineLock, AiOutlineMail } from "react-icons/ai";
 import { FaExclamation } from "react-icons/fa";
-import LoggedIn from "../Components/TermsInput/LoggedIn";
-import Carousel from "./Carousel";
+import Carousel from "@/app/register/Carousel";
+import TextInput from "../InputField/TextInput";
+import LoggedIn from "../TermsInput/LoggedIn";
 interface SignInData {
   userEmail: string;
   userPassword: string;
@@ -253,7 +251,7 @@ const LoginPage: React.FC<PageProps> = () => {
                     </button>
                     <p className="mt-5 block text-sm leading-relaxed text-gray-900 ">
                       Dont have an accout?{" "}
-                      <Link href="/">
+                      <Link href="/register">
                         <span className="font-bold text-blue-700">
                           Register Here
                         </span>

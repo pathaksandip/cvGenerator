@@ -1,4 +1,5 @@
 /** @format */
+/** @format */
 
 "use client";
 interface UserRegisterData {
@@ -18,9 +19,9 @@ import { FaExclamation, FaStore, FaUser } from "react-icons/fa";
 import { FaSquarePhone } from "react-icons/fa6";
 
 import { Transition } from "@headlessui/react";
-import TextInput from "../InputField/TextInput";
-import { registerUser } from "../server/actions/authentication/registerOwner";
-import Terms from "../TermsInput/Terms";
+import { registerUser } from "../Components/server/actions/authentication/registerOwner";
+import TextInput from "../Components/InputField/TextInput";
+import Terms from "../Components/TermsInput/Terms";
 
 interface PageProps {}
 
@@ -58,7 +59,7 @@ const Register: React.FC<PageProps> = () => {
             setErrorMessage(data?.error);
             setIsLoading(false);
           } else {
-            router.push("/login");
+            router.push("/");
             resetForm();
             setIsLoading(false);
           }
@@ -227,7 +228,7 @@ const Register: React.FC<PageProps> = () => {
                               Alreadey Registered
                               <a
                                 className="text-blue-600 decoration-2 ml-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                                href="/login"
+                                href="/"
                               >
                                 Click Here
                               </a>

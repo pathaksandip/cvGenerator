@@ -120,7 +120,7 @@ function About() {
         } else if (data?.error) {
           setErrorMessage(data.error);
           if (data.error === "Invalid session") {
-            Router.push("/login");
+            Router.push("/");
           }
           setIsLoading(false);
         } else {
